@@ -31,9 +31,9 @@ class LinkedList {
             Node *current;
             current = head;
 
-            for (current != nullptr) {
+            while (current != nullptr) {
                 len++;
-                current = current.next;
+                current = (*current).next;
             }
             return len;
         };
@@ -42,6 +42,7 @@ class LinkedList {
             if (head == nullptr) {
                 head = new Node(val);
                 return;
+            }
 
             Node *current;
             current = head;
@@ -49,42 +50,53 @@ class LinkedList {
                 current = (*current).next;
             }
             (*current).next = new Node(val);
-            }
         }
+
+        // void print() {
+        //     Node *current;
+        //     current = head;
+        //     while(current->next != nullptr) {
+        //         std::cout << (*current).value <<"  ";
+        //         current = (*current).next;
+        //     }
+        //     std::cout<< current -> value << std::endl; 
+        // }
 
         void print() {
             Node *current;
             current = head;
-            while(current != nullptr) {
-                std::cout << current.value <<" ";
-                current = current.next
-            std::cout<< current.value;
+            for (int i=0; i<lenght(); i++) {
+                std::cout << (*current).value <<" ";
+                current = current -> next;
             }
+            std::cout<<std::endl;
         }
 
-        void print() {
-            Node *current;
-            current = head;
-            for (int i; i<=lenght(); i++) {
-                std::cout << current.value <<" ";
-                current = current.next
-            }
-        }
         int &operator[](int index){
-            if (index < 0 or index >= size) {
-                throw range_error("IndexError: index out of range");
+            if (index < 0 || index >= lenght()) {
+                throw std::range_error("IndexError: index out of range");
             }
             Node *current = head;
             for (int i; i<=index; i++){
-                current = current.next;
+                current = current->next;
             }
-            return current.value;
+            return current->value;
         }
 };
 
+
+
+
 int main () {
-    list_1 = LinkedList();
+    std::cout <<"in main"<<std::endl;
+    LinkedList list_1;
     list_1.append(5);
+    list_1.append(36);
+    list_1.append(8);
+    list_1.append(100);
+
+    list_1.print();
+    
 
     return 0;
 }
