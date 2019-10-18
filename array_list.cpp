@@ -21,9 +21,10 @@ class ArrayList{
 
     }
 //Creates ArrayList with element from vector
-    ArrayList(vector<int> v){
+    ArrayList(const vector<int>& v){
       unsigned int x = v.size();
       size = (int)x;
+
       x--;
       x|x>>1;
       x|x>>2;
@@ -31,7 +32,8 @@ class ArrayList{
       x|x>>8;
       x|x>>16;
       x++;
-      capacity = x;
+      capacity = (int)x;
+
       data = new int[capacity];
       for (int i=0;i<size;i++){
         *(data+i)=v[i];
@@ -45,11 +47,11 @@ class ArrayList{
       delete data;
     }
 //Adds element to end of ArrayList. Uses resize(). Complexity is normally O(1). If resize is called it becomes O(n)
-    void append(int var){
+    void append(const int& var){
       if (size+1 > capacity){
         resize();
       }
-      data[size]=var;
+      *(data+size)=var;
       size ++;
 
     }
@@ -101,14 +103,14 @@ class ArrayList{
       cout <<*(data+size-1)<<")\n";
     }
     //[]-operator, access value at input-location. Complexity is O(1)
-    int operator [] (int index) {
+    int &operator [] (const int &index) {
       if (index > size-1 || index < 0){
         throw range_error("Index out of range");
       }
       return *(data+index);
     }
     //Insert function, uses resize function. Complexity is normally O(n-i). If Resize is called it is O(n)
-    void insert(int val, int index) {
+    void insert(const int& val, const int& index) {
       if (index > size-1 || index < 0){
         throw range_error("Index out of range");
       }
@@ -126,7 +128,7 @@ class ArrayList{
       size++;
     }
     //Remove function. Complexity is =(n-i)
-    void remove(int index) {
+    void remove(const int& index) {
       if (index > size-1 || index < 0){
         throw range_error("Index out of range");
       }
@@ -141,7 +143,7 @@ class ArrayList{
       }
    }
    //pop-function, uses remove function. Complexity is O(n-i)
-   int pop(int index){
+   int pop(const int& index){
      if (index > size-1 || index < 0){
        throw range_error("Index out of range");
      }
@@ -157,6 +159,8 @@ class ArrayList{
    }
 };
 
+
+
 int main() {
 
 
@@ -166,12 +170,8 @@ int main() {
   list.print();
   list.remove(0);
   list.append(32);
-  int x = list.pop(2);
-  list.remove(1);
-  list.remove(2);
-  list.remove(0);
-  list.remove(0);
+  list[0]=48;
+
   list.print();
-  cout << x;
 
 }
