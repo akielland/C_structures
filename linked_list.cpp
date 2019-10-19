@@ -45,6 +45,7 @@ class LinkedList {
             }
 
             Node *current;
+            
             current = head;
             while ((*current).next != nullptr) {
                 current = (*current).next;
@@ -52,15 +53,15 @@ class LinkedList {
             (*current).next = new Node(val);
         }
 
-        // void print() {
-        //     Node *current;
-        //     current = head;
-        //     while(current->next != nullptr) {
-        //         std::cout << (*current).value <<"  ";
-        //         current = (*current).next;
-        //     }
-        //     std::cout<< current -> value << std::endl; 
-        // }
+        void print() {
+            Node *current;
+            current = head;
+            while(current->next != nullptr) {
+                std::cout << (*current).value <<"  ";
+                current = (*current).next;
+            }
+            std::cout<< current -> value << std::endl; 
+        }
 
         void print() {
             Node *current;
@@ -82,21 +83,49 @@ class LinkedList {
             }
             return current->value;
         }
-};
 
+        ~LinkedList() {
+            Node *current;
+            current = head;
+            Node *temp;
+            while (current != nullptr) {
+                temp = (*current).next;
+                delete current;        // why not pack out the node here with *?
+                current = temp;
+            }
+        }
+
+        void insert(int index, int value) {
+            int place = index;
+            int val = value;
+
+            int i = 0;
+            Node *current;
+            current = head;
+
+            while (i < place) {
+                i++;
+                current = (*current).next;
+            }
+            (*current).value = val;
+        }
+    
+};
 
 
 
 int main () {
     std::cout <<"in main"<<std::endl;
     LinkedList list_1;
-    list_1.append(5);
-    list_1.append(36);
-    list_1.append(8);
-    list_1.append(100);
+    // list_1.append(5);
+    // list_1.append(36);
+    // list_1.append(8);
+    // list_1.append(100);
+    // list_1.print();
 
-    list_1.print();
-    
+    // list_1.insert(1,0);
+    // list_1.print();
+    list_1.append(3);
 
     return 0;
 }
