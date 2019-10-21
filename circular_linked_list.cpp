@@ -96,7 +96,7 @@ public:
         return current->value;
     }
 
-    int pop(int index) {
+    int pop_jeos(int index) {
 
 
         int i = 0;
@@ -124,6 +124,7 @@ public:
         Node* pop_Node = (*temp_current).next;
         int pop_value = pop_Node->value;
         (*temp_current).next = pop_Node->next;
+        head = pop_Node -> next;
         delete pop_Node;
         return pop_value;
     }
@@ -132,15 +133,13 @@ public:
 
     vector<int> jeosephus_sequence(int k) {
       vector<int> output;
-      int counter=0;
       while ((*head).next != head){
-
-        int x = pop(counter);
-        //output.push_back(pop(counter));
-        cout<< x;
-
+        int x = pop_jeos(k-1);
+        output.push_back(x);
       }
-      cout <<pop(0);
+
+      int x = pop_jeos(0);
+      output.push_back(x);
 
       return output;
 
@@ -152,8 +151,7 @@ public:
 };
 
 int main() {
-  CircLinkedList test (6);
-  test.print();
-  vector<int> x = test.jeosephus_sequence(3);
-  //return 0;;
+  CircLinkedList test (68);
+  vector<int> x = test.jeosephus_sequence(7);
+  cout<<x.back();
 }
