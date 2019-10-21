@@ -159,19 +159,33 @@ class ArrayList{
    }
 };
 
+//Return true if n is prime, slow implementation. Complexity O(n)
+bool is_prime(int n){
+  if (n==2){
+    return true;
+  }
+  else if (n%2==0){
+    return false;
+  }
 
-
+  for (int i=3;2*i<=n;i=i+2){
+    if (n%i==0){
+      return false;
+  }
+}
+  return true;
+}
+//Tests ArrayList by generating primes and appending them to an ArrayList
 int main() {
-
-
-
-
-  ArrayList list({3,23,35,0,23,84,32});
-  list.print();
-  list.remove(0);
-  list.append(32);
-  list[0]=48;
-
-  list.print();
-
+int count = 0;
+int n = 2;
+ArrayList primes;
+while (count<10) {
+  if (is_prime(n)==true){
+    primes.append(n);
+    count ++;
+  }
+  n++;
+}
+primes.print();
 }
