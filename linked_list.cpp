@@ -11,7 +11,7 @@ struct Node {
         value = n;
         next = nullptr;
     }
-    Node(int n, Node* p) {
+    Node(int n, Node* p) {  // Not in use
         value = n;
         next = p;
     }
@@ -19,13 +19,10 @@ struct Node {
 
 class LinkedList {
     // Class that implement ...
-
 private:
     Node* head;
-    Node* tail;
+    Node* tail; // No need for this yet
 
-
-        
 public:
     LinkedList() {
         head = nullptr;
@@ -65,27 +62,17 @@ public:
             return;
         }
 
-        Node* current;
-        current = head;
+        Node* current = head;
         while ((*current).next != nullptr) {
             current = (*current).next;
         }
         (*current).next = new Node(val);
     }
 
-    // void print() {
-    //     Node* current = head;
-    //     while(current->next != nullptr) {
-    //         std::cout << (*current).value <<"  ";
-    //         current = (*current).next;
-    //     }
-    //     std::cout<< current -> value << std::endl; 
-    // }
-
     void print() {
-        Node *current;
-        current = head;
-        for (int i=0; i<lenght(); i++) {
+        int i;
+        Node *current = head;
+        for (i=0; i<lenght(); i++) {
             std::cout << (*current).value <<" ";
             current = current -> next;
         }
@@ -93,11 +80,11 @@ public:
     }
 
     int& operator[](int index){
-        if (index < 0 || index >= lenght()) { // why not just >?
+        if (index < 0 || index >= lenght()) {
             throw std::range_error("IndexError: index out of range. Either before or after the list");
         }
         Node* current = head;
-        for (int i; i<index; i++) {
+        for (int i=0; i<index; i++) {
             current = current->next;
         }
         return current->value;
@@ -110,14 +97,10 @@ public:
         if (index < 0 || index > lenght()) {
             throw std::range_error("IndexError: index out of range. Either before or after the list");
         }
-
         int i = 0;
-        Node *current;
-        current = head;
-
+        Node *current = head;
         while (i < index) {
-            i++;
-            current = (*current).next;
+            current = (*current).next; i++;
         }
 
         // Node* next = current->next;
@@ -130,7 +113,7 @@ public:
     }
     
 void remove(int index) {
-    if (index<0 or index > lenght()) {
+    if (index<0 or index >= lenght()) {
         throw std::range_error("IndexError: index out of range");
     }
     int i = 0;
@@ -146,7 +129,7 @@ void remove(int index) {
 }
 
 int pop(int index) {
-    if (index<0 or index > lenght()) {
+    if (index<0 or index >= lenght()) {
     throw std::range_error("IndexError: index out of range");
     }
     int i = 0;
@@ -156,31 +139,26 @@ int pop(int index) {
         i++;
     }
     
-    Node* next_Node = (*current).next;
-    int value_current = next_Node->value;
-    (*current).next   = next_Node->next;
-    delete next_Node;
-
-    return value_current;
+    Node* pop_Node = (*current).next;
+    int pop_value = pop_Node->value;
+    (*current).next = pop_Node->next;
+    delete pop_Node;
+    return pop_value;
 }
 
 int pop() {
     Node* current = head;
-    for (int i = 0; i<(lenght()-1); i++) {
+    while (current->next != nullptr) {
+        current = current->next;
         std::cout <<current->value <<std::endl;
-        current = (*current).next;
     }
-    std::cout << "out of loop" << std::endl;
 
     int value_current = current->value;
-    std::cout << "adress of current is: "<< current->value <<std::endl;
+    std::cout << "value of current is: "<< current->value <<std::endl;
     delete current;
-
     return value_current;
 }
-
 };
-
 
 int main () {
     
@@ -196,6 +174,10 @@ int main () {
     list_1.print();
     std::cout << list_1.pop() <<std::endl;
     list_1.print();
-    std::cout <<"end of main"<<std::endl;
+    // std::cout <<list_1.lenght()<<std::endl;
+    // std::cout <<list_1[5]<<std::endl;
+    // LinkedList list_2;
+    // list_2.insert(0,1);
+   
     return 0;
 }
