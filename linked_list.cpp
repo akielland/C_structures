@@ -1,5 +1,7 @@
 // type of linked list: singly linked list or a doubly linked list
 # include <iostream>
+# include <vector>
+using namespace std;
 
 struct Node {
     // Implements Nodes types; 
@@ -27,6 +29,16 @@ public:
     LinkedList() {
         head = nullptr;
         tail = nullptr; // No need for this yet
+    }
+    LinkedList(std::vector<int> vec) {
+        LinkedList temp_vec;
+
+        for (int i=0; i < vec.size(); i++) {
+            temp_vec.append(vec[i]);
+        }
+        head = temp_vec.head;
+
+
     }
 
     ~LinkedList() {
@@ -154,7 +166,7 @@ int pop() {
     }
 
     int value_current = current->value;
-    std::cout << "value of current is: "<< current->value <<std::endl;
+    std::cout << "value of current is: "<< current <<std::endl;
     delete current;
     return value_current;
 }
@@ -162,21 +174,24 @@ int pop() {
 
 int main () {
     
-    LinkedList list_1;
-    list_1.append(5);
-    list_1.append(36);
-    list_1.append(8);
-    list_1.append(100);
-    list_1.append(500);
-    list_1.print();
+    // LinkedList list_1;
+    // list_1.append(5);
+    // list_1.append(6);
+    // list_1.append(7);
+    // list_1.append(9);
+    // list_1.append(10);
+    // list_1.print();
 
-    list_1.insert(2,55);
-    list_1.print();
-    std::cout << list_1.pop() <<std::endl;
-    list_1.print();
+    // list_1.insert(3, 8);
+    // list_1.print();
+    // std::cout << list_1.pop() <<std::endl;
+    // list_1.print();
     // std::cout <<list_1.lenght()<<std::endl;
     // std::cout <<list_1[5]<<std::endl;
-    // LinkedList list_2;
+
+    vector<int> v = {1,2,3};
+    // LinkedList list_2(vec1);
+    // list_2.print();
     // list_2.insert(0,1);
    
     return 0;
