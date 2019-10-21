@@ -4,8 +4,8 @@
 using namespace std;
 
 struct Node {
-    // Implements Nodes types; 
-    // used to make the building block objects of in the linked_list class 
+    // Implements Nodes types;
+    // used to make the building block objects of in the linked_list class
     int value;
     Node* next;
 
@@ -21,7 +21,7 @@ struct Node {
 
 class LinkedList {
     // Class that implement ...
-private:
+public:
     Node* head;
     Node* tail; // No need for this yet
 
@@ -31,12 +31,12 @@ public:
         tail = nullptr; // No need for this yet
     }
     LinkedList(std::vector<int> vec) {
-        LinkedList temp_vec;
+        head = nullptr;
+        tail = nullptr; // No need for this yet
 
         for (int i=0; i < vec.size(); i++) {
-            temp_vec.append(vec[i]);
+            append(vec[i]);
         }
-        head = temp_vec.head;
 
 
     }
@@ -47,12 +47,12 @@ public:
         Node* temp;
         while (current != nullptr) {
             temp = (*current).next;
-            delete current;        
-            // why not pack out the node here with *? 
+            delete current;
+            // why not pack out the node here with *?
             // destroy array and non-array(pointer) objects which are created by new expression
             // Pointer to object is not destroyed, value or memory block pointed by pointer is destroyed
             current = temp;
-        }   
+        }
     }
 
     int lenght() {
@@ -117,13 +117,13 @@ public:
 
         // Node* next = current->next;
         // current->next = new Node(value, next);
-        
+
         Node* temp_next = current->next;
         current->next = new Node(value);
         current = current->next;
         current->next = temp_next;
     }
-    
+
 void remove(int index) {
     if (index<0 or index >= lenght()) {
         throw std::range_error("IndexError: index out of range");
@@ -150,7 +150,7 @@ int pop(int index) {
         current = (*current).next;
         i++;
     }
-    
+
     Node* pop_Node = (*current).next;
     int pop_value = pop_Node->value;
     (*current).next = pop_Node->next;
@@ -173,7 +173,7 @@ int pop() {
 };
 
 int main () {
-    
+
     // LinkedList list_1;
     // list_1.append(5);
     // list_1.append(6);
@@ -190,9 +190,10 @@ int main () {
     // std::cout <<list_1[5]<<std::endl;
 
     vector<int> v = {1,2,3};
-    // LinkedList list_2(vec1);
+    LinkedList list_2(v);
+    list_2.print();
     // list_2.print();
     // list_2.insert(0,1);
-   
+
     return 0;
 }
