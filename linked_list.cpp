@@ -21,7 +21,7 @@ struct Node {
 
 class LinkedList {
     // Class that implement ...
-public:
+private:
     Node* head;
     Node* tail; // No need for this yet
 
@@ -66,7 +66,7 @@ public:
             current = (*current).next;
         }
         return len;
-    };
+    }
 
     void append(int val) {
         if (head == nullptr) {
@@ -191,7 +191,7 @@ int main () {
 
     vector<int> v = {1,2,3};
     LinkedList list_2(v);
-    list_2.print();
+    cout<<list_2.pop(0);
     // list_2.print();
     // list_2.insert(0,1);
 
