@@ -1,7 +1,6 @@
-// type of linked list: singly linked list or a doubly linked list
+// type of linked list: singly linked list
 # include <iostream>
 # include <vector>
-using namespace std;
 
 struct Node {
     // Implements Nodes types;
@@ -37,8 +36,6 @@ public:
         for (int i=0; i < vec.size(); i++) {
             append(vec[i]);
         }
-
-
     }
 
     ~LinkedList() {
@@ -48,9 +45,6 @@ public:
         while (current != nullptr) {
             temp = (*current).next;
             delete current;
-            // why not pack out the node here with *?
-            // destroy array and non-array(pointer) objects which are created by new expression
-            // Pointer to object is not destroyed, value or memory block pointed by pointer is destroyed
             current = temp;
         }
     }
@@ -115,9 +109,6 @@ public:
             current = (*current).next; i++;
         }
 
-        // Node* next = current->next;
-        // current->next = new Node(value, next);
-
         Node* temp_next = current->next;
         current->next = new Node(value);
         current = current->next;
@@ -160,40 +151,47 @@ int pop(int index) {
 
 int pop() {
     Node* current = head;
+    Node* prev;
     while (current->next != nullptr) {
+        prev = current;
         current = current->next;
-        std::cout <<current->value <<std::endl;
     }
 
     int value_current = current->value;
-    std::cout << "value of current is: "<< current <<std::endl;
     delete current;
+    prev->next = nullptr;
     return value_current;
 }
 };
 
 int main () {
 
-    // LinkedList list_1;
-    // list_1.append(5);
-    // list_1.append(6);
-    // list_1.append(7);
-    // list_1.append(9);
-    // list_1.append(10);
-    // list_1.print();
+    LinkedList list_1;
+    list_1.append(5);
+    list_1.append(6);
+    list_1.append(7);
+    list_1.append(9);
+    list_1.append(10);
+    
+    list_1.print();
 
-    // list_1.insert(3, 8);
-    // list_1.print();
-    // std::cout << list_1.pop() <<std::endl;
-    // list_1.print();
-    // std::cout <<list_1.lenght()<<std::endl;
-    // std::cout <<list_1[5]<<std::endl;
+    list_1.insert(3, 8);
+    list_1.print();
 
-    vector<int> v = {1,2,3};
+    std::cout << list_1.pop() <<std::endl;
+    list_1.print();
+    std::cout<<std::endl;
+
+    std::cout <<list_1.lenght()<<std::endl;
+    std::cout <<list_1[4]<<std::endl;
+
+    std::vector<int> v = {1,2,3};
     LinkedList list_2(v);
-    cout<<list_2.pop(0);
-    // list_2.print();
-    // list_2.insert(0,1);
+    std::cout<<list_2.pop(0)<<std::endl;
+    list_2.print();
+    list_2.insert(0,3);
+    list_2.print();
+    std::cout<<std::endl;
 
     return 0;
 }

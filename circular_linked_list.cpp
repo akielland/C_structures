@@ -24,7 +24,6 @@ class CircLinkedList {
 private:
     Node* head;
 
-
 public:
     CircLinkedList() {
         head = nullptr;
@@ -39,10 +38,6 @@ public:
         }
     }
 
-
-
-
-
     ~CircLinkedList() {
         Node* current;
         current = head;
@@ -50,16 +45,11 @@ public:
         while ((*current).next != head) {
             temp = (*current).next;
             delete current;
-            // why not pack out the node here with *?
-            // destroy array and non-array(pointer) objects which are created by new expression
-            // Pointer to object is not destroyed, value or memory block pointed by pointer is destroyed
             current = temp;
         }
         delete current;
 
     }
-
-
 
     void append(int val) {
         if (head == nullptr) {
@@ -74,18 +64,17 @@ public:
 
         }
         (*current).next = new Node(val,head);
-
     }
 
     void print() {
         int i;
         Node *current = head;
         while ((*current).next != head) {
-            std::cout << (*current).value <<" ";
+            cout << (*current).value <<" ";
             current = current -> next;
         }
-        std::cout<<(*current).value;
-        std::cout<<std::endl;
+        cout<<(*current).value;
+        cout<<endl;
     }
 
     int& operator[](int index){
@@ -97,61 +86,57 @@ public:
     }
 
     int pop_jeos(int index) {
-
-
         int i = 0;
         Node* current = head;
-        Node* temp_current = nullptr;
+        Node*  previous = nullptr;   // temp_current
+        
         while (i<index) {
             i++;
-            temp_current = current;
+            previous = current;     // temp_current
             current = (*current).next;
-
         }
 
         if (current == head){
           int pop_value = (*head).value;
-          Node* current = head;
+        //   Node* current = head;
           while ((*current).next != head) {
               current = (*current).next;
-        }
+            }
           (*current).next=(*head).next;
           Node* temp_head = (*head).next;
           delete head;
           head = temp_head;
+          cout<<"head is: "<< head << endl;
           return pop_value;
         }
-        Node* pop_Node = (*temp_current).next;
+
+        Node* pop_Node = current;  // (*temp_current).next;
         int pop_value = pop_Node->value;
-        (*temp_current).next = pop_Node->next;
-        head = pop_Node -> next;
+        previous->next = pop_Node->next;   // temp_current
+        head = pop_Node->next;
         delete pop_Node;
+        cout<<"head is: "<< head << endl;
         return pop_value;
     }
-
-
 
     vector<int> jeosephus_sequence(int k) {
       vector<int> output;
       while ((*head).next != head){
         int x = pop_jeos(k-1);
         output.push_back(x);
+        cout<<x<<endl;
       }
 
-      int x = pop_jeos(0);
+      int x = head->value; //  pop_jeos(0);
       output.push_back(x);
 
       return output;
-
-
-
-
     }
 
 };
 
 int main() {
-  CircLinkedList test (68);
-  vector<int> x = test.jeosephus_sequence(7);
-  cout<<x.back();
+  CircLinkedList test(6);
+  vector<int> x = test.jeosephus_sequence(3);
+  cout<<x.back()<<endl;
 }
