@@ -5,6 +5,7 @@ All execises were compiled and ran successfully.
 
 Oppgave 1)
 Compile commands: g++ array_list.cpp -std=c++11
+
 Code run commands: ./a.out
 
 Oppgave 2)
