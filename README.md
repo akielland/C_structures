@@ -1,6 +1,7 @@
 Prosjekt2
 
-Oppgave 3.
+
+Oppgave 3)
 
 Get element i by index
 ArrayList:  O(1); kan hente element ved hjelp peker+i. Denne operasjonen er konstant
@@ -35,6 +36,7 @@ ArrayList:  O(n); må printe ut en verdi fra hver minneadresse
 LinkedList: O(n); må printe ut en verdi fra hver node
 
 
-Oppgave 4g
+
+Oppgave 4g)
 
 L(68, 7) = 68
