@@ -1,4 +1,3 @@
-// type of linked list: singly linked list or a doubly linked list
 # include <iostream>
 # include <vector>
 using namespace std;
@@ -28,26 +27,23 @@ struct Node {
 };
 
 class CircLinkedList {
-    /* Implements the type <LinkedList>; an order sequence of the types <Node>
-    - A LinkedList object can be instantiated with a parameters type < vector<int> > adding the first elemnts of the list
-    - A LinkedList object can be instantiated witout Nodes, then it is just a type <Node pointer>
+    /* Implements the type <CircLinkedList>; a circular order sequence of the types <Node>
+    - A CircLinkedList object can be instantiated with a parameters type < vector<int> > adding the first elemnts of the list
+    - A CircLinkedList object can be instantiated witout Nodes, then it is just a type <Node pointer>
     containing the nullptr adress. The append method can then be used to add list elemnts
     
     Parameter
     ---------
     non: 
-    vec: vector object which implements 
 
     Methods
     -------
-    length(): returns the number of Nodes in the list
     append(value): adds one Node to the end of the list
-    insert(index, value): inserts at new Node at index location and move downstream Nodes one index step backwards
-    remove(): removes at new Node at index location and move downstream Nodes one index step forward
-    pop(): removes last Node of the list and return the value of the removed Node
+    pop_jeos(index): removes last Node of the list and return the value of the removed Node
     pop(index): returns the value of a Node at index location. Remove the Node and move downstream Nodes one index step forward
     print(): prints the list
     int& operator[](int index): overloads the square bracket operator to access elements by index
+    jeosephus_sequence(int k): returns the vector<int> 
      ~LinkedList: removes all Nodes allocated to memory as a final step when running the program
     */
 private:
@@ -63,13 +59,14 @@ public:
 
         for (int i=1; i<=n; i++) {
           append(i);
-
         }
     }
 
     ~CircLinkedList() {
+        if (head!=nullptr) {
         Node* current;
         current = head;
+        cout<<current->next<<endl;
         Node* temp;
         while ((*current).next != head) {
             temp = (*current).next;
@@ -77,7 +74,7 @@ public:
             current = temp;
         }
         delete current;
-
+        }
     }
 
     void append(int val) {
@@ -90,7 +87,6 @@ public:
         Node* current = head;
         while ((*current).next != head) {
             current = (*current).next;
-
         }
         (*current).next = new Node(val,head);
     }
@@ -125,17 +121,24 @@ public:
             current = (*current).next;
         }
 
+        if (current == current->next) {
+            int pop_value = current->value;
+            head = nullptr;
+            delete current;
+            return pop_value;
+        }
+
         if (current == head){
-          int pop_value = (*head).value;
+            int pop_value = current->value;
         //   Node* current = head;
           while ((*current).next != head) {
               current = (*current).next;
             }
+        
           (*current).next=(*head).next;
           Node* temp_head = (*head).next;
           delete head;
           head = temp_head;
-          cout<<"head is: "<< head << endl;
           return pop_value;
         }
 
@@ -144,7 +147,6 @@ public:
         previous->next = pop_Node->next;   // temp_current
         head = pop_Node->next;
         delete pop_Node;
-        cout<<"head is: "<< head << endl;
         return pop_value;
     }
 
@@ -153,19 +155,22 @@ public:
       while ((*head).next != head){
         int x = pop_jeos(k-1);
         output.push_back(x);
-        cout<<x<<endl;
       }
 
-      int x = head->value; //  pop_jeos(0);
+      int x = pop_jeos(0);
       output.push_back(x);
 
       return output;
     }
-
 };
 
+void last_man_standing(int n, int k){
+    CircLinkedList solving(n);
+    vector<int> result = solving.jeosephus_sequence(k);
+    cout<<"Of "<< n <<" men where every "<< k << "th man is out" << "; the last man standing is: "<<result.back()<<endl;
+}
+
 int main() {
-  CircLinkedList test(6);
-  vector<int> x = test.jeosephus_sequence(3);
-  cout<<x.back()<<endl;
+    last_man_standing(68, 7);
+    return(0);
 }
