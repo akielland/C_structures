@@ -27,14 +27,16 @@ struct Node {
 };
 
 class CircLinkedList {
-    /* Implements the type <CircLinkedList>; a circular order sequence of the types <Node>
-    - A CircLinkedList object can be instantiated with a parameters type < vector<int> > adding the first elemnts of the list
+    /* Implements the type <CircLinkedList>; a circular order sequence of the types <Node>, with increasing number 1, 2, 3, ...
+    - A CircLinkedList object can be instantiated with a parameters type <int n> adding numbers in the list up to n
     - A CircLinkedList object can be instantiated witout Nodes, then it is just a type <Node pointer>
     containing the nullptr adress. The append method can then be used to add list elemnts
     
     Parameter
     ---------
-    non: 
+    non:
+    n: number of men in jeosephus problem
+    k: count between the men taken out of list in each round (paramter of the method: jeosephus_sequence(int k))
 
     Methods
     -------
@@ -43,9 +45,10 @@ class CircLinkedList {
     pop(index): returns the value of a Node at index location. Remove the Node and move downstream Nodes one index step forward
     print(): prints the list
     int& operator[](int index): overloads the square bracket operator to access elements by index
-    jeosephus_sequence(int k): returns the vector<int> 
+    jeosephus_sequence(int k): returns a vector with the list index of the men taken out in the order they are taken out 
      ~LinkedList: removes all Nodes allocated to memory as a final step when running the program
     */
+
 private:
     Node* head;
 
@@ -165,6 +168,15 @@ public:
 };
 
 void last_man_standing(int n, int k){
+    /* Solve the jeosephus problem for a given number of men (n) with spesific inbetween intervall (k) 
+    returns the number of the last man as was his number in the original list
+  
+    Parameter
+    ---------
+    n: number of men in jeosephus problem
+    k: count between the men taken out of list in each round
+    */
+
     CircLinkedList solving(n);
     vector<int> result = solving.jeosephus_sequence(k);
     cout<<"Of "<< n <<" men where every "<< k << "th man is out" << "; the last man standing is: "<<result.back()<<endl;
