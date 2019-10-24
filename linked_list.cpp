@@ -1,6 +1,7 @@
 // type of linked list: singly linked list
 # include <iostream>
 # include <vector>
+# include <stdexcept>
 
 struct Node {
     /* Implements the type Node; the building block objects in the linked_list class
