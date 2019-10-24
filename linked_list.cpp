@@ -3,35 +3,57 @@
 # include <vector>
 
 struct Node {
-    // Implements Nodes types;
-    // used to make the building block objects of in the linked_list class
+    /* Implements the type Node; the building block objects in the linked_list class
+    The Node contains a value of type <int> (set through parameter),
+    and a pointer of type <Node pointer>, which is the memory adress of the next Node 
+    or nullptr if it is the last Node of list
+    
+    Parameter
+    ----------
+    n: value to be stored in Node
+    */
+
     int value;
     Node* next;
 
-    Node(int n) {
-        value = n;
+    Node(int number) {
+        value = number;
         next = nullptr;
-    }
-    Node(int n, Node* p) {  // Not in use
-        value = n;
-        next = p;
     }
 };
 
 class LinkedList {
-    // Class that implement ...
+    /* Implements the type <LinkedList>; an order sequence of the types <Node>
+    - A LinkedList object can be instantiated with a parameters type < vector<int> > adding the first elemnts of the list
+    - A LinkedList object can be instantiated witout Nodes, then it is just a type <Node pointer>
+    containing the nullptr adress. The append method can then be used to add list elemnts
+    
+    Parameter
+    ---------
+    non: 
+    vec: vector object which implements 
+
+    Methods
+    -------
+    length(): returns the number of Nodes in the list
+    append(value): adds one Node to the end of the list
+    insert(index, value): inserts at new Node at index location and move downstream Nodes one index step backwards
+    remove(): removes at new Node at index location and move downstream Nodes one index step forward
+    pop(): removes last Node of the list and return the value of the removed Node
+    pop(index): returns the value of a Node at index location. Remove the Node and move downstream Nodes one index step forward
+    print(): prints the list
+    int& operator[](int index): overloads the square bracket operator to access elements by index
+     ~LinkedList: removes all Nodes allocated to memory as a final step when running the program
+    */
 private:
     Node* head;
-    Node* tail; // No need for this yet
 
 public:
     LinkedList() {
         head = nullptr;
-        tail = nullptr; // No need for this yet
     }
     LinkedList(std::vector<int> vec) {
         head = nullptr;
-        tail = nullptr; // No need for this yet
 
         for (int i=0; i < vec.size(); i++) {
             append(vec[i]);
@@ -49,7 +71,7 @@ public:
         }
     }
 
-    int lenght() {
+    int length() {
         int len;
         len = 0;
         Node* current;
@@ -62,9 +84,9 @@ public:
         return len;
     }
 
-    void append(int val) {
+    void append(int value) {
         if (head == nullptr) {
-            head = new Node(val);
+            head = new Node(value);
             return;
         }
 
@@ -72,13 +94,13 @@ public:
         while ((*current).next != nullptr) {
             current = (*current).next;
         }
-        (*current).next = new Node(val);
+        (*current).next = new Node(value);
     }
 
     void print() {
         int i;
         Node *current = head;
-        for (i=0; i<lenght(); i++) {
+        for (i=0; i<length(); i++) {
             std::cout << (*current).value <<" ";
             current = current -> next;
         }
@@ -86,7 +108,7 @@ public:
     }
 
     int& operator[](int index){
-        if (index < 0 || index >= lenght()) {
+        if (index < 0 || index >= length()) {
             throw std::range_error("IndexError: index out of range. Either before or after the list");
         }
         Node* current = head;
@@ -100,23 +122,23 @@ public:
         if (head == nullptr) {
             throw std::length_error("list contains no elemnts; use append to add new element");
         }
-        if (index < 0 || index > lenght()) {
+        if (index < 0 || index > length()) {
             throw std::range_error("IndexError: index out of range. Either before or after the list");
         }
         int i = 0;
-        Node *current = head;
-        while (i < index) {
-            current = (*current).next; i++;
+        Node* current = head;
+        while (i < index-1) {
+            current = current->next; i++;
         }
 
-        Node* temp_next = current->next;
+        Node* next = current->next;
         current->next = new Node(value);
         current = current->next;
-        current->next = temp_next;
+        current->next = next;
     }
 
 void remove(int index) {
-    if (index<0 or index >= lenght()) {
+    if (index<0 or index >= length()) {
         throw std::range_error("IndexError: index out of range");
     }
     int i = 0;
@@ -129,24 +151,6 @@ void remove(int index) {
     Node* next_Node = (*current).next;
     (*current).next = (*next_Node).next;
     delete next_Node;
-}
-
-int pop(int index) {
-    if (index<0 or index >= lenght()) {
-    throw std::range_error("IndexError: index out of range");
-    }
-    int i = 0;
-    Node* current = head;
-    while (i<index) {
-        current = (*current).next;
-        i++;
-    }
-
-    Node* pop_Node = (*current).next;
-    int pop_value = pop_Node->value;
-    (*current).next = pop_Node->next;
-    delete pop_Node;
-    return pop_value;
 }
 
 int pop() {
@@ -162,34 +166,63 @@ int pop() {
     prev->next = nullptr;
     return value_current;
 }
+
+int pop(int index) {
+    if (index<0 or index >= length()) {
+    throw std::range_error("IndexError: index out of range");
+    }
+    int i = 0;
+    Node* current = head;
+    while (i<index-1) {
+        current = (*current).next;
+        i++;
+    }
+
+    Node* pop_Node = (*current).next;
+    int pop_value = pop_Node->value;
+    (*current).next = pop_Node->next;
+    delete pop_Node;
+    return pop_value;
+}
 };
 
 int main () {
-
+    std::cout<<std::endl;
+    std::cout<<"TESTING linked_list"<<std::endl;
+    std::cout<<std::endl;
+    std::cout<<"Making list with append:"<<std::endl;
     LinkedList list_1;
+    list_1.append(1);
+    list_1.append(2);
+    list_1.append(3);
+    list_1.append(4);
     list_1.append(5);
-    list_1.append(6);
-    list_1.append(7);
-    list_1.append(9);
-    list_1.append(10);
+    list_1.print();
+    std::cout<<"lenght() claims list_1 contains "<<list_1.length()<<" Nodes"<<std::endl;
+
+    std::cout<<std::endl;
+    std::cout<<"Testing insert and remove by inserting and remving 3 at index 2:"<<std::endl;
+    list_1.insert(2, 3);
+    list_1.print();
+    list_1.remove(2);
+    list_1.print();
     
-    list_1.print();
-
-    list_1.insert(3, 8);
-    list_1.print();
-
-    std::cout << list_1.pop() <<std::endl;
+    std::cout<<std::endl;
+    std::cout <<"POP last element: "<<list_1.pop() <<std::endl;
     list_1.print();
     std::cout<<std::endl;
 
-    std::cout <<list_1.lenght()<<std::endl;
-    std::cout <<list_1[4]<<std::endl;
+    std::cout<<"Operator[] oveloading: list_1[2] gives "<<list_1[2]<<std::endl;
+    std::cout<<std::endl;
 
-    std::vector<int> v = {1,2,3};
+    std::cout<<"Making list with vector as parameter:"<<std::endl;
+    std::vector<int> v = {1,2,3,4,5,6,7,8,9,10};
     LinkedList list_2(v);
-    std::cout<<list_2.pop(0)<<std::endl;
     list_2.print();
-    list_2.insert(0,3);
+    std::cout<<std::endl;
+
+    std::cout<<"POP element at index 7: ";
+    std::cout<<list_2.pop(7)<<std::endl;
     list_2.print();
     std::cout<<std::endl;
 
