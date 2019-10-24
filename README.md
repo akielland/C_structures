@@ -27,9 +27,14 @@ ArrayList:  O(1), O(n) hvis kaller på shrink to fit; senke str med ett element 
 LinkedList: O(n); må itere over hele listen
 
 Remove element from middle
-ArrayList:  O(n-1), O(n) hvis kaller på shrink to fit
+ArrayList:  O(n-i), O(n) hvis kaller på shrink to fit; må flytte alle elementer over i en ned (shrink to fit er også O(n))
 LinkedList: O(i); må iterere til indexsert Node.
 
 Print
 ArrayList:  O(n); må printe ut en verdi fra hver minneadresse
 LinkedList: O(n); må printe ut en verdi fra hver node
+
+
+Oppgave 4g
+
+L(68, 7) = 68
