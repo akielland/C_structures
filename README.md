@@ -1,6 +1,5 @@
 Prosjekt2
 
-
 Oppgave 3)
 
 Get element i by index
@@ -34,7 +33,6 @@ LinkedList: O(i); må iterere til indexsert Node.
 Print
 ArrayList:  O(n); må printe ut en verdi fra hver minneadresse
 LinkedList: O(n); må printe ut en verdi fra hver node
-
 
 
 Oppgave 4g)
