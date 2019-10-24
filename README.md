@@ -1,6 +1,15 @@
 Prosjekt2
-
 https://github.uio.no/IN1910/H19_project2_aasmusae_kielland
+
+All execises were compiled and ran successfully.
+
+Oppgave 1)
+Compile commands: 
+Code run commands: 
+
+Oppgave 2)
+Compile commands: 
+Code run commands: 
 
 Oppgave 3)
 
@@ -38,5 +47,8 @@ LinkedList: O(n); må printe ut en verdi fra hver node
 
 
 Oppgave 4g)
+
+Compile commands: 
+Code run commands:
 
 L(68, 7) = 68
