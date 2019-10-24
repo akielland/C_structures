@@ -201,7 +201,7 @@ int main () {
     std::cout<<"lenght() claims list_1 contains "<<list_1.length()<<" Nodes"<<std::endl;
 
     std::cout<<std::endl;
-    std::cout<<"Testing insert and remove by inserting and remving 3 at index 2:"<<std::endl;
+    std::cout<<"Testing insert and remove by inserting and removing 3 at index 2:"<<std::endl;
     list_1.insert(2, 3);
     list_1.print();
     list_1.remove(2);

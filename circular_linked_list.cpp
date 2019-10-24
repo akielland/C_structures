@@ -4,8 +4,16 @@
 using namespace std;
 
 struct Node {
-    // Implements Nodes types;
-    // used to make the building block objects of in the linked_list class
+   /* Implements the type Node; the building block objects in the circular_linked_list class
+    The Node contains a value of type <int> (set through parameter),
+    and a pointer of type <Node pointer>, which is the memory adress of the next Node 
+    or nullptr if it is the last Node of list
+    
+    Parameter
+    ----------
+    n: value to be stored in Node
+    */
+
     int value;
     Node* next;
 
@@ -20,7 +28,28 @@ struct Node {
 };
 
 class CircLinkedList {
-    // Class that implement ...
+    /* Implements the type <LinkedList>; an order sequence of the types <Node>
+    - A LinkedList object can be instantiated with a parameters type < vector<int> > adding the first elemnts of the list
+    - A LinkedList object can be instantiated witout Nodes, then it is just a type <Node pointer>
+    containing the nullptr adress. The append method can then be used to add list elemnts
+    
+    Parameter
+    ---------
+    non: 
+    vec: vector object which implements 
+
+    Methods
+    -------
+    length(): returns the number of Nodes in the list
+    append(value): adds one Node to the end of the list
+    insert(index, value): inserts at new Node at index location and move downstream Nodes one index step backwards
+    remove(): removes at new Node at index location and move downstream Nodes one index step forward
+    pop(): removes last Node of the list and return the value of the removed Node
+    pop(index): returns the value of a Node at index location. Remove the Node and move downstream Nodes one index step forward
+    print(): prints the list
+    int& operator[](int index): overloads the square bracket operator to access elements by index
+     ~LinkedList: removes all Nodes allocated to memory as a final step when running the program
+    */
 private:
     Node* head;
 
