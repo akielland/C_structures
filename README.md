@@ -9,8 +9,8 @@ Compile commands: g++ array_list.cpp -std=c++11
 Code run commands: ./a.out
 
 Oppgave 2)
-Compile commands: 
-Code run commands: 
+Compile commands: g++ linked_list.cpp -std=c++11 
+Code run commands: ./a.out
 
 Oppgave 3)
 
@@ -47,9 +47,9 @@ ArrayList:  O(n); må printe ut en verdi fra hver minneadresse
 LinkedList: O(n); må printe ut en verdi fra hver node
 
 
-Oppgave 4g)
+Oppgave 4
 
-Compile commands: 
-Code run commands:
+Compile commands: g++ circular_linked_list.cpp -std=c++11 
+Code run commands: ./a.out
 
 L(68, 7) = 68
