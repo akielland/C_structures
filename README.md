@@ -4,8 +4,8 @@ https://github.uio.no/IN1910/H19_project2_aasmusae_kielland
 All execises were compiled and ran successfully.
 
 Oppgave 1)
-Compile commands: g++ array_list.cpp -std=c++11
 
+Compile commands: g++ array_list.cpp -std=c++11 
 Code run commands: ./a.out
 
 Oppgave 2)
