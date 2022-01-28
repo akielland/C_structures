@@ -1,5 +1,4 @@
-Prosjekt2
-https://github.uio.no/IN1910/H19_project2_aasmusae_kielland
+## Array list and Linked list in C++
 
 All execises were compiled and ran successfully.
 
